@@ -13,9 +13,9 @@ class App extends Component {
     let payload =
     {
       "channels_list": [
-        {"channel": 50, "value": 255},
-        {"channel": 51, "value": 0},
-        {"channel": 52, "value": 0}
+        {"channel": 50, "value": Math.floor(Math.random() * Math.floor(255))},
+        {"channel": 51, "value": Math.floor(Math.random() * Math.floor(255))},
+        {"channel": 52, "value": Math.floor(Math.random() * Math.floor(255))}
       ]
     }
     console.log(payload)
