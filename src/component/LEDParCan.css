@@ -1,0 +1,46 @@
+.LEDParCan {
+  background-color: #DFDFDF;
+
+  position: relative;
+  height: 100%; width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:  "name  name"
+                        "knob1 knob2"
+                        "fader fader"
+}
+
+.LEDParCan > * {
+  /* border: 1px solid #000; */
+}
+
+.LEDParCan .Knob {
+
+}
+
+.LEDParCan .Fader {
+  position: relative;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  grid-area: fader;
+}
+
+.LEDParCan .Fader>.NumberSelector {
+  position: relative;
+}
+.LEDParCan .Fader>.NumberSelector input {
+
+}
+
+.LEDParCan .Fader>.NumberLabel {
+  padding: 0; margin: 0;
+  position: relative;
+  text-align: center;
+}
+.LEDParCan .Fader>.NumberLabel input {
+
+}
