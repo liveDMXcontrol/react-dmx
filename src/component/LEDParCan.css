@@ -4,19 +4,20 @@
   position: relative;
   height: 100%; width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto;
-  grid-template-areas:  "name  name"
-                        "knob1 knob2"
-                        "fader fader"
+  grid-template-areas:  "name  "
+                        "ColorXY "
+                        "fader";
+  justify-items: center;
 }
 
 .LEDParCan > * {
   /* border: 1px solid #000; */
 }
 
-.LEDParCan .Knob {
-
+.LEDParCan .ColorXY {
+  grid-area: ColorXY;
 }
 
 .LEDParCan .Fader {
