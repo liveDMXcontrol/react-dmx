@@ -10,7 +10,7 @@ export default class App extends Component {
   }
 
   updateDMX (payload) {
-    fetch('http://10.0.1.3:8000', {
+    fetch('http://dmx.local', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
