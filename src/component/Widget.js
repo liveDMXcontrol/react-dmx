@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { SketchPicker } from 'react-color'
 import './Widget.css'
 
 export class DeviceLabel extends Component {
@@ -140,11 +141,13 @@ export class ColorXY extends Component {
   render () {
     return (
       <div className="ColorXY">
-        <input
-          type="color"
-          defaultValue={this.props.storedValue}
+        <SketchPicker
           name={this.props.name}
+          color={this.props.storedValue}
           onChange={this.props.handleChange}
+          disableAlpha={true}
+          presetColors={["#F00", "#0F0", "#00F", "#FF0", "#F0F", "#0FF", "#FFF", "#000",
+                         "#F90", "#F09", "#0F9", "#9F0", "#90F", "#09F", "#999", "#333"]}
           />
       </div>
     )
