@@ -120,27 +120,27 @@ export class Switch extends Component {
   }
 }
 
-export class XYPad extends Component {
-  constructor (props) {
-    super(props);
+// export class XYPad extends Component {
+//   constructor (props) {
+//     super(props);
+//
+//     this.state = {}
+//   }
+//
+//   render () {
+//     return (
+//       <div className="XYPad">
+//         <Widget
+//           name={this.props.name} />
+//       </div>
+//     )
+//   }
+// }
 
-    this.state = {}
-  }
-
+export class Color extends Component {
   render () {
     return (
-      <div className="XYPad">
-        <Widget
-          name={this.props.name} />
-      </div>
-    )
-  }
-}
-
-export class ColorXY extends Component {
-  render () {
-    return (
-      <div className="ColorXY">
+      <div className="Color">
         <SketchPicker
           name={this.props.name}
           color={this.props.storedValue}
@@ -154,22 +154,22 @@ export class ColorXY extends Component {
   }
 }
 
-export class Knob extends Component {
-  render () {
-    return (
-      <div className="Knob">
-        <NumberSelector
-          name={this.props.name}
-          storedValue={this.props.storedValue}
-          min="-50"
-          max="50"
-          handleChange={this.props.handleChange}
-          style={this.props.style}
-          />
-      </div>
-    )
-  }
-}
+// export class Knob extends Component {
+//   render () {
+//     return (
+//       <div className="Knob">
+//         <NumberSelector
+//           name={this.props.name}
+//           storedValue={this.props.storedValue}
+//           min="-50"
+//           max="50"
+//           handleChange={this.props.handleChange}
+//           style={this.props.style}
+//           />
+//       </div>
+//     )
+//   }
+// }
 
 export class Fader extends Component {
   render () {
@@ -186,17 +186,6 @@ export class Fader extends Component {
           name={this.props.propertyName+"ValueLabel"}
           storedValue={this.props.storedValue}
           />
-      </div>
-    )
-  }
-}
-
-export class HorizontalFader extends Component {
-  render () {
-    return (
-      <div className="HorizontalFader">
-        <Fader
-          name={this.props.name} />
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ColorXY, DeviceLabel } from './Widget';
+import { Color, DeviceLabel } from './Widget';
 import './LEDParCan.css'
 
 export default class LEDParCan extends Component {
@@ -38,7 +38,7 @@ export default class LEDParCan extends Component {
         <DeviceLabel
           name={this.props.name}
           />
-        <ColorXY
+        <Color
           name="color"
           storedValue={this.props.color}
           handleChange={this.handleChange}

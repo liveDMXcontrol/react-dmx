@@ -6,8 +6,8 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto;
-  grid-template-areas:  "name  "
-                        "ColorXY "
+  grid-template-areas:  "name"
+                        "Color"
                         "fader";
   justify-items: center;
 }
@@ -16,8 +16,8 @@
   /* border: 1px solid #000; */
 }
 
-.LEDParCan .ColorXY {
-  grid-area: ColorXY;
+.LEDParCan .Color {
+  grid-area: Color;
 }
 
 .LEDParCan .Fader {
