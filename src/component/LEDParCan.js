@@ -5,20 +5,21 @@ import './LEDParCan.css'
 export default class LEDParCan extends Component {
   constructor (props) {
     super(props)
+    this.state = { }
 
-    // this.handleChange = this.handleChange.bind(this)
     this.state = {
-      device: { name: "", address: 50 },
-      // knob1: { value: "0", style: { width: "150px", height: "150px" } },
-      // knob2: { value: "0", style: { width: "150px", height: "150px" } },
-      color: { value: "#FFFFFF" },
-      fader: { value: "50", style: { orient: "horizontal" }, property: "brightness"}
+      name: {...props},
+      address: 50,
+      color: "#FFFFFF",
+      fader: { value: "50", style: { orient: "horizontal" }, property: "brightness" }
     }
+
+    this.handleColorChange = this.handleColorChange.bind(this)
   }
 
   parseToDMX = (rgb) => {
     // take a rgb value and break it up into dmx messages
-    let address0 = this.state.device.address
+    let address0 = this.state.address
     let address1 = address0 + 1; let address2 = address1 + 1
 
     return {
@@ -30,30 +31,30 @@ export default class LEDParCan extends Component {
     }
 
   }
-  handleChange = (e) => {
-    let newState = this.state
-    newState[e.target.name].value = e.target.value
-    this.setState(newState)
-
-    this.props.updateDMX(this.parseToDMX(this.state.color.value))
-  }
+  // handleChange = (e) => {
+  //   let newState = this.state
+  //   newState[e.target.name].value = e.target.value
+  //   this.setState(newState)
+  //
+  //   this.props.updateDMX(this.parseToDMX(this.state.color))
+  // }
   handleColorChange = (e) => {
     let newState = this.state
-    newState.color.value = e.rgb
+    newState.color = e.rgb
     this.setState(newState)
 
-    this.props.updateDMX(this.parseToDMX(this.state.color.value))
+    this.props.updateDMX(this.parseToDMX(this.state.color))
   }
 
   render () {
     return (
-      <div className="LEDParCan">
+      <div className="LEDParCan" name={this.props.name}>
         <DeviceLabel
-          name="LEDParCan"
+          name={this.props.name}
           />
         <ColorXY
           name="color"
-          storedValue={this.state.color.value}
+          storedValue={this.state.color}
           handleChange={this.handleColorChange}
           />
       </div>)
