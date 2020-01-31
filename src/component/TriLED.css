@@ -1,0 +1,20 @@
+.TriLED {
+  /* background-color: #DFDFDF; */
+
+  position: relative;
+  height: 100%; width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:  "name"
+                        "Color";
+  justify-items: center;
+}
+
+.TriLED > * {
+
+}
+
+.TriLED .Color {
+  grid-area: Color;
+}

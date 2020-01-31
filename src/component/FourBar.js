@@ -1,8 +1,15 @@
+// {
+//   name: "FourBar1",
+//   widget: null,
+//   address: null,
+//   color: { value: "#FFFFFF" }
+// }
+
 import React, { Component } from 'react';
 import { ColorSketch, DeviceLabel } from './Widget';
-import './LEDParCan.css'
+import './FourBar.css'
 
-export default class LEDParCan extends Component {
+export default class FourBar extends Component {
   constructor (props) {
     super(props)
     this.parseToDMX=this.parseToDMX.bind(this)
@@ -14,30 +21,42 @@ export default class LEDParCan extends Component {
     // this.handleColorChange = this.handleColorChange.bind(this)
   }
 
-  parseToDMX = (rgb, dimmer) => {
+  handleChange = (e) => {
+    this.props.handleColorChange(e, this.parseToDMX)
+  }
+  parseToDMX = (rgb) => {
     // take a rgb value and break it up into dmx messages
-    // console.log(this.props)
+    console.log(this.props)
     let address = this.props.address
 
     return {
       "channels_list": [
-        { "channel": address,       "value": (rgb.r * 100/dimmer) },
-        { "channel": (address + 1), "value": (rgb.g * 100/dimmer) },
-        { "channel": (address + 2), "value": (rgb.b * 100/dimmer) },
+        { "channel": address,        "value": rgb.r },
+        { "channel": (address + 1),  "value": rgb.g },
+        { "channel": (address + 2),  "value": rgb.b },
+        { "channel": (address + 3),  "value": rgb.r },
+        { "channel": (address + 4),  "value": rgb.g },
+        { "channel": (address + 5),  "value": rgb.b },
+        { "channel": (address + 6),  "value": rgb.r },
+        { "channel": (address + 7),  "value": rgb.g },
+        { "channel": (address + 8),  "value": rgb.b },
+        { "channel": (address + 9),  "value": rgb.r },
+        { "channel": (address + 10), "value": rgb.g },
+        { "channel": (address + 11), "value": rgb.b },
       ]
     }
   }
 
   render () {
     return (
-      <div className="LEDParCan" name={this.props.name}>
+      <div className="FourBar" name={this.props.name}>
         <DeviceLabel
           name={this.props.name}
           />
         <ColorSketch
           name="color"
           storedValue={this.props.color}
-          handleChange={(e) => this.props.handleColorChange(e, this.parseToDMX)}
+          handleChange={this.handleChange}
           />
       </div>)
   }

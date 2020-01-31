@@ -2,10 +2,45 @@
   height: 100vh; width: 100vw;
   background-color: pink;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+}
+@media screen and (max-width: 1200px) {
+  .App {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (max-width: 1000px) {
+  .App {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 800px) {
+  .App {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 600px) {
+  .App {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .App>* {
-  border: 1px solid #AAA;
+  border: 1px solid #888;
+}
+
+.App > div:nth-child(1n) {
+  background-color: #CFCFCF;
+}
+.App > div:nth-child(2n) {
+  background-color: #BFBFBF;
+}
+.App > div:nth-child(3n) {
+  background-color: #AFAFAF;
+}
+.App > div:nth-child(4n) {
+  background-color: #9F9F9F;
+}
+.App > div:nth-child(5n) {
+  background-color: #8F8F8F;
 }
