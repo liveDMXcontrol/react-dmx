@@ -15,10 +15,12 @@ export default class App extends Component {
     super(props)
 
     this.updateDMX = this.updateDMX.bind(this)
+    this.handleWashColorChange = this.handleWashColorChange.bind(this)
     this.state = {
-        washColor: "#FFFFFF",
-        fxColor: "#FFFFFF",
-        spinDirection: 0
+        washColor: {r: 255, g: 255, b: 255, a: 1},
+        fxColor: {r: 255, g: 255, b: 255, a: 1},
+        spinDirection: 0,
+        masterDimmer: 100
       }
   }
 
@@ -28,6 +30,20 @@ export default class App extends Component {
         {device.widget}
       </div>
     ))
+  }
+  handleChange = (e, parseToDMX) => {
+    let newState = this.state
+    newState[e.target.name].value = e.target.value
+    this.setState(newState)
+
+    this.props.updateDMX(parseToDMX(this.state.color))
+  }
+  handleWashColorChange = (e, parseToDMX) => {
+    let newState = this.state
+    newState.washColor = e.rgb
+    this.setState(newState)
+
+    this.updateDMX(parseToDMX(this.state.washColor))
   }
 
   updateDMX (payload) {
@@ -46,10 +62,12 @@ export default class App extends Component {
       <div className="App">
         <LEDParCan
           name="LEDParCan"
+          address={50}
           color={this.state.washColor}
-          handleColorChange={this.props.handeColorChange}
+          handleColorChange={this.handleWashColorChange}
+          updateDMX={this.updateDMX}
           />
       </div>
-    );
+    )
   }
 }
