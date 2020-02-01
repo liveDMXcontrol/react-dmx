@@ -129,10 +129,11 @@ export class ColorCircle extends Component {
           color={this.props.storedValue}
           onChange={this.props.handleChange}
           disableAlpha={true}
-          colors={[ "#F00", "#0F0", "#00F", "#FF0", "#F0F", "#0FF",
-                    "#FFF", "#000", "#F90", "#F09", "#0F9", "#9F0",
-                    "#90F", "#09F", "#999", "#333", "#F01", "#0F1",
-                    "#001", "#FF1", "#F02", "#0F3", "#FF3", "#003"]}
+          colors={[ "#F00", "#0F0", "#00F",
+                    "#FF0", "#F0F", "#0FF",
+                    "#FFF"]}
+          circleSize={42}
+          circleSpacing={24}
           />
       </div>
     )

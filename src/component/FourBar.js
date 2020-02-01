@@ -43,7 +43,6 @@ export default class FourBar extends Component {
   }
   parseToDMX = (rgb) => {
     // take a rgb value and break it up into dmx messages
-    console.log(this.props)
     let address = this.props.address
 
     return {

@@ -14,11 +14,11 @@ export default class App extends Component {
     this.handleFXColorChange = this.handleFXColorChange.bind(this)
     this.resetToZero = this.resetToZero.bind(this)
     this.state = {
+        masterDimmer: 100,
         washColor: {r: 255, g: 255, b: 255, a: 1},
         fxColor: {r: 0, g: 0, b: 0, a: 1},
-        spinDirection: 0,
-        fxDimmer: 0,
-        masterDimmer: 100
+        fxSpinDirection: 0,
+        fxDimmer: 0
       }
   }
 
@@ -29,24 +29,25 @@ export default class App extends Component {
       </div>
     ))
   }
-  handleChange = (e, channel) => {
+  handleChange = (e) => {
     let newState = this.state
     newState[e.target.name] = Number(e.target.value)
     this.setState(newState)
   }
-  handleWashColorChange = (e, parseToDMX) => {
+  handleWashColorChange = (e) => {
     let newState = this.state
     newState.washColor = e.rgb
     this.setState(newState)
   }
-  handleFXColorChange = (e, parseToDMX) => {
+  handleFXColorChange = (e) => {
     let newState = this.state
     newState.fxColor = e.rgb
     this.setState(newState)
   }
-  resetToZero = (e, channel) => {
+  resetToZero = (e) => {
     let newState = this.state
-    newState[e.target.name] = 0
+    newState['fxSpinDirection'] = 0
+    newState['fxDimmer'] = 0
     this.setState(newState)
   }
 
@@ -66,7 +67,7 @@ export default class App extends Component {
       <div className="App">
         <LEDParCan
           name="LEDParCan"
-          address={144}
+          address={145}
           color={this.state.washColor}
           handleColorChange={this.handleWashColorChange}
           masterDimmer={this.state.masterDimmer}
@@ -87,24 +88,24 @@ export default class App extends Component {
           updateDMX={this.updateDMX}
           />
         <TriLED
-          name="TriLED_w"
+          name="TriLED_b"
           TriLEDColor="black"
-          address={0}
+          address={130}
           color={this.state.fxColor}
-          spinDirection={this.state.spinDirection}
-          fxDimmer={this.state.fxDimmer}
+          spinDirection={this.state.fxSpinDirection}
+          dimmer={this.state.fxDimmer}
           handleColorChange={this.handleFXColorChange}
           handleChange={this.handleChange}
           resetToZero={this.resetToZero}
           updateDMX={this.updateDMX}
           />
         <TriLED
-          name="TriLED_b"
+          name="TriLED_w"
           TriLEDColor="white"
-          address={0}
+          address={133}
           color={this.state.fxColor}
-          spinDirection={this.state.spinDirection}
-          fxDimmer={this.state.fxDimmer}
+          spinDirection={this.state.fxSpinDirection}
+          dimmer={this.state.fxDimmer}
           handleColorChange={this.handleFXColorChange}
           handleChange={this.handleChange}
           resetToZero={this.resetToZero}
