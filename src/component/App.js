@@ -33,37 +33,21 @@ export default class App extends Component {
     let newState = this.state
     newState[e.target.name] = Number(e.target.value)
     this.setState(newState)
-
-    this.updateDMX(
-        { "channels_list": [
-          {channel: channel, value: Number(e.target.value)}
-        ]}
-      )
   }
   handleWashColorChange = (e, parseToDMX) => {
     let newState = this.state
     newState.washColor = e.rgb
     this.setState(newState)
-
-    this.updateDMX(parseToDMX(this.state.washColor, this.state.masterDimmer))
   }
   handleFXColorChange = (e, parseToDMX) => {
     let newState = this.state
     newState.fxColor = e.rgb
     this.setState(newState)
-
-    this.updateDMX(parseToDMX(this.state.washColor))
   }
   resetToZero = (e, channel) => {
     let newState = this.state
     newState[e.target.name] = 0
     this.setState(newState)
-
-    this.updateDMX(
-      { "channels_list": [
-        {channel: channel, value: 0}
-      ]}
-    )
   }
 
   updateDMX (payload) {
@@ -112,6 +96,7 @@ export default class App extends Component {
           handleColorChange={this.handleFXColorChange}
           handleChange={this.handleChange}
           resetToZero={this.resetToZero}
+          updateDMX={this.updateDMX}
           />
         <TriLED
           name="TriLED_b"
@@ -123,6 +108,7 @@ export default class App extends Component {
           handleColorChange={this.handleFXColorChange}
           handleChange={this.handleChange}
           resetToZero={this.resetToZero}
+          updateDMX={this.updateDMX}
           />
       </div>
     )

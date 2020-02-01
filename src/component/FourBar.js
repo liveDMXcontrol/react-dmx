@@ -28,6 +28,10 @@ export default class FourBar extends Component {
     };
 
   }
+  shouldComponentUpdate(nextProps) {
+    return (this.props.color !== nextProps.color ||
+            this.props.masterDimmer !== nextProps.masterDimmer)
+  }
   componentDidUpdate(prevProps) {
     this.props.updateDMX(
       this.parseToDMX(

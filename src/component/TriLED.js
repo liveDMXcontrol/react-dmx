@@ -22,6 +22,22 @@ export default class TriLED extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      externalData: null,
+      color: props.color,
+    };
+  }
+  shouldComponentUpdate(nextProps) {
+    return (this.props.fxColor !== nextProps.fxColor ||
+            this.props.spinDirection !== nextProps.spinDirection ||
+            this.props.fxDimmer !== nextProps.fxDimmer)
+  }
+  componentDidUpdate(prevProps) {
+    this.props.updateDMX(
+      this.parseToDMX())
+  }
+
   turnOff = (e, address) => {
     e.preventDefault();
     let name = e.target.name
@@ -57,7 +73,9 @@ export default class TriLED extends Component {
 
       return {
         "channels_list": [
-          { "channel": (address+1), "value": color }
+          { "channel": address,     "value": this.props.spinDirection }, // spin
+          { "channel": (address+1), "value": color },                    // color
+          { "channel": (address+2), "value": this.props.fxDimmer }       // dimmer
         ]
       }
     }
