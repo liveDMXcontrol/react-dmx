@@ -21,11 +21,23 @@ export default class LEDParCan extends Component {
 
     return {
       "channels_list": [
-        { "channel": address,       "value": (rgb.r * 100/dimmer) },
+        { "channel": (address),     "value": (rgb.r * 100/dimmer) },
         { "channel": (address + 1), "value": (rgb.g * 100/dimmer) },
         { "channel": (address + 2), "value": (rgb.b * 100/dimmer) },
       ]
     }
+  }
+  static getDerivedStateFromProps(props, state) {
+    return {
+      externalData: null,
+      color: props.color,
+    };
+
+  }
+  componentDidUpdate(prevProps) {
+    this.props.updateDMX(
+      this.parseToDMX(
+        this.props.color, this.props.masterDimmer))
   }
 
   render () {

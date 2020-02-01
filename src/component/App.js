@@ -45,7 +45,6 @@ export default class App extends Component {
     newState.washColor = e.rgb
     this.setState(newState)
 
-    console.log(parseToDMX(this.state.washColor, this.state.masterDimmer))
     this.updateDMX(parseToDMX(this.state.washColor, this.state.masterDimmer))
   }
   handleFXColorChange = (e, parseToDMX) => {
@@ -68,7 +67,6 @@ export default class App extends Component {
   }
 
   updateDMX (payload) {
-    console.log(payload)
     fetch('http://kara.local', {
         method: 'post',
         headers: {
@@ -84,7 +82,7 @@ export default class App extends Component {
       <div className="App">
         <LEDParCan
           name="LEDParCan"
-          address={50}
+          address={144}
           color={this.state.washColor}
           handleColorChange={this.handleWashColorChange}
           masterDimmer={this.state.masterDimmer}

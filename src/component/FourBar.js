@@ -21,6 +21,19 @@ export default class FourBar extends Component {
     // this.handleColorChange = this.handleColorChange.bind(this)
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      externalData: null,
+      color: props.color,
+    };
+
+  }
+  componentDidUpdate(prevProps) {
+    this.props.updateDMX(
+      this.parseToDMX(
+        this.props.color, this.props.masterDimmer))
+  }
+
   handleChange = (e) => {
     this.props.handleColorChange(e, this.parseToDMX)
   }
