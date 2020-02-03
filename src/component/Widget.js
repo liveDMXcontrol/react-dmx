@@ -47,7 +47,7 @@ Widget.defaultProps = {
 export class PropertyLabel extends Component {
   render () {
     return (
-      <div className="PropertyLabel">
+      <div className={"PropertyLabel "+this.props.name}>
         <label name={this.props.name}>
           {this.props.label}
         </label>
@@ -59,7 +59,7 @@ export class PropertyLabel extends Component {
 export class ValueLabel extends Component {
   render () {
     return (
-      <div className="ValueLabel">
+      <div className={"ValueLabel "+this.props.name}>
         <label name={this.props.name}>
           {this.props.label}
         </label>
@@ -77,7 +77,7 @@ export class NumberSelector extends Component {
 
   render () {
     return (
-      <div className="NumberSelector">
+      <div className={"NumberSelector "+this.props.name}>
         <Widget
           name={this.props.name}
           type="range"
@@ -98,7 +98,7 @@ export class NumberSelector extends Component {
 export class Button extends Component {
   render () {
     return (
-      <div className="Button">
+      <div className={"Button "+this.props.name}>
         <Widget
           name={this.props.name}
           storedValue={this.props.text}
@@ -109,12 +109,39 @@ export class Button extends Component {
   }
 }
 
+export class Select extends Component {
+  render () {
+    let options = this.props.options.map((option) => {
+      return (
+        <option value={option.value} key={option.text}>{option.text}</option>)
+    })
+    return (
+      <div className={"Select "+this.props.name}>
+        <select
+          name={this.props.name}
+          value={this.props.storedValue}
+          onChange={this.props.handleChange}
+          >
+            {options}
+        </select>
+      </div>
+    )
+  }
+}
+
 export class Switch extends Component {
   render () {
     return (
-      <div className="Switch">
+      <div className={"Switch "+this.props.name}>
         <Widget
-          name={this.props.name} />
+          type="checkbox"
+          name={this.props.name}
+          min={this.props.min}
+          max={this.props.max}
+          defaultValue={this.props.defaultValue}
+          storedValue={this.props.storedValue}
+          handleChange={this.props.handleChange}
+          onDoubleClick={this.props.onDoubleClick} />
       </div>
     )
   }
@@ -123,7 +150,7 @@ export class Switch extends Component {
 export class ColorCircle extends Component {
   render () {
     return (
-      <div className="Color ColorCircle">
+      <div className={"Color ColorCircle "+this.props.name}>
         <CirclePicker
           name={this.props.name}
           color={this.props.storedValue}
@@ -142,18 +169,21 @@ export class ColorCircle extends Component {
 export class ColorSketch extends Component {
   render () {
     return (
-      <div className="Color ColorSketch">
+      <div className={"Color ColorSketch "+this.props.name}>
         <SketchPicker
           name={this.props.name}
           color={this.props.storedValue}
           onChange={this.props.handleChange}
-          disableAlpha={true}
+          disableAlpha={this.props.disableAlpha}
           presetColors={["#F00", "#0F0", "#00F", "#FF0", "#F0F", "#0FF", "#FFF", "#000",
                          "#F90", "#F09", "#0F9", "#9F0", "#90F", "#09F", "#999", "#333"]}
           />
       </div>
     )
   }
+}
+ColorSketch.defaultProps = {
+  disableAlpha: true
 }
 
 // export class Knob extends Component {
@@ -176,7 +206,7 @@ export class ColorSketch extends Component {
 export class Fader extends Component {
   render () {
     return (
-      <div className="Fader">
+      <div className={"Fader "+this.props.name}>
         {/*this.props.propertyName*/}
         <NumberSelector
           name={this.props.name}

@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
-import LEDParCan from './LEDParCan';
-import FourBar from './FourBar';
-import TriLED from './TriLED';
+import React, { Component } from 'react'
+import './App.css'
+import LEDParCan from './LEDParCan'
+import FourBar from './FourBar'
+import TriLED from './TriLED'
+import Mushroom from './Mushroom'
+import Trio from './Trio'
+import Dimmer from './Dimmer'
 
 export default class App extends Component {
   constructor (props) {
@@ -29,10 +32,10 @@ export default class App extends Component {
       </div>
     ))
   }
-  handleChange = (e) => {
-    let newState = this.state
+  handleChange = (e, thisthis=this) => {
+    let newState = thisthis.state
     newState[e.target.name] = Number(e.target.value)
-    this.setState(newState)
+    thisthis.setState(newState)
   }
   handleWashColorChange = (e) => {
     let newState = this.state
@@ -44,15 +47,15 @@ export default class App extends Component {
     newState.fxColor = e.rgb
     this.setState(newState)
   }
-  resetToZero = (e) => {
-    let newState = this.state
+  resetToZero = (e, thisthis=this) => {
+    let newState = thisthis.state
     newState['fxSpinDirection'] = 0
     newState['fxDimmer'] = 0
-    this.setState(newState)
+    thisthis.setState(newState)
   }
 
   updateDMX (payload) {
-    fetch('http://kara.local', {
+    fetch('http://dmx.local', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -109,6 +112,26 @@ export default class App extends Component {
           handleColorChange={this.handleFXColorChange}
           handleChange={this.handleChange}
           resetToZero={this.resetToZero}
+          updateDMX={this.updateDMX}
+          />
+        <Mushroom
+          name="Mushroom"
+          address={136}
+          handleChange={this.handleChange}
+          resetToZero={this.resetToZero}
+          updateDMX={this.updateDMX}
+          />
+        <Trio
+          name="Trio"
+          address={1}
+          handleChange={this.handleChange}
+          resetToZero={this.resetToZero}
+          updateDMX={this.updateDMX}
+          />
+        <Dimmer
+          name="Dimmer"
+          address={509}
+          handleChange={this.handleChange}
           updateDMX={this.updateDMX}
           />
       </div>
