@@ -2,6 +2,9 @@
   grid-area: name;
   text-align: center;
   font-size: 1.2em;
+  padding: 10px;
+  background-color: #444;
+  color: #FFF;
 }
 
 .Widget {

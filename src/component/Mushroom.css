@@ -1,0 +1,20 @@
+.Mushroom {
+  /* background-color: #DFDFDF; */
+
+  position: relative;
+  height: 100%; width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:  "name"
+                        "Color";
+  place-items: center;
+}
+
+.Mushroom > * {
+
+}
+
+.Mushroom .Color {
+  grid-area: Color;
+}

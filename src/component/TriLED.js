@@ -36,7 +36,6 @@ export default class TriLED extends Component {
       this.props.dimmer !== nextProps.dimmer)
   }
   componentDidUpdate(prevProps) {
-    console.log('didUpdate')
     this.props.updateDMX(
       this.parseToDMX())
   }
@@ -45,9 +44,9 @@ export default class TriLED extends Component {
     e.preventDefault();
     let name = e.target.name
     e.target.name="spinDirection"
-    this.props.resetToZero(e, address)
+    this.props.resetToZero(e, this)
     e.target.name="dimmer"
-    this.props.resetToZero(e, address+2)
+    this.props.resetToZero(e, this)
     e.target.name=name
   }
   parseToDMX = (rgb=this.props.color) => {

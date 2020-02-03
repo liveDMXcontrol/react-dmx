@@ -38,9 +38,6 @@ export default class FourBar extends Component {
         this.props.color, this.props.masterDimmer))
   }
 
-  handleChange = (e) => {
-    this.props.handleColorChange(e, this.parseToDMX)
-  }
   parseToDMX = (rgb) => {
     // take a rgb value and break it up into dmx messages
     let address = this.props.address
@@ -72,7 +69,7 @@ export default class FourBar extends Component {
         <ColorSketch
           name="color"
           storedValue={this.props.color}
-          handleChange={this.handleChange}
+          handleChange={this.props.handleColorChange}
           />
       </div>)
   }

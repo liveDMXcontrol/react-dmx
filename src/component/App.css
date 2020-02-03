@@ -2,16 +2,42 @@
   height: 100vh; width: 100vw;
   background-color: pink;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  overflow-x: hidden;
+}
+@media screen and (min-width: 1201px) {
+  .App {
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+    grid-auto-flow: column dense;
+  }
+  .App div.FourBar {
+    /* grid-column: span 2; */
+  }
+  .App div.Trio {
+    /* background-color: red; */
+    grid-column: span 2;
+    grid-row: span 3;
+  }
+  .App div.Dimmer {
+    grid-row: span 3;
+  }
 }
 @media screen and (max-width: 1200px) {
   .App {
-    grid-template-columns: repeat(4, 1fr);
+    grid-auto-columns: auto;
+  }
+  .App div.Trio {
+    /* background-color: red; */
+    grid-column: span 2;
+    grid-row: auto;
+  }
+  .App div.Dimmer {
+    grid-column: span 2;
   }
 }
 @media screen and (max-width: 1000px) {
   .App {
-    grid-template-columns: repeat(3, 1fr);
+    grid-auto-columns: auto;
   }
 }
 @media screen and (max-width: 800px) {
@@ -21,7 +47,7 @@
 }
 @media screen and (max-width: 600px) {
   .App {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 

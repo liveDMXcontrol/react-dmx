@@ -53,7 +53,7 @@ export default class LEDParCan extends Component {
         <ColorSketch
           name="color"
           storedValue={this.props.color}
-          handleChange={(e) => this.props.handleColorChange(e, this.parseToDMX)}
+          handleChange={this.props.handleColorChange}
           />
       </div>)
   }
