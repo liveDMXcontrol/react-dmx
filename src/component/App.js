@@ -19,6 +19,7 @@ export default class App extends Component {
     this.state = {
         masterDimmer: 100,
         washColor: {r: 255, g: 255, b: 255, a: 1},
+        linkToWash: false,
         fxColor: {r: 0, g: 0, b: 0, a: 1},
         fxSpinDirection: 0,
         fxDimmer: 0
@@ -37,7 +38,12 @@ export default class App extends Component {
     newState[e.target.name] = Number(e.target.value)
     thisthis.setState(newState)
   }
-  handleWashColorChange = (e) => {
+  handleColorChange = (e, thisthis=this) => {
+    let newState = thisthis
+    newState.color = e.rgb
+    thisthis.setState(newState)
+  }
+  handleWashColorChange = (e, thisthis=this) => {
     let newState = this.state
     newState.washColor = e.rgb
     this.setState(newState)
@@ -55,7 +61,10 @@ export default class App extends Component {
   }
 
   updateDMX (payload) {
-    fetch('http://dmx.local', {
+    // console.log('payload sent')
+    // return false
+
+    fetch('http://dmx.local/api', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -80,14 +89,18 @@ export default class App extends Component {
           name="4Bar1"
           address={64}
           color={this.state.washColor}
-          handleColorChange={this.handleWashColorChange}
+          linkToWash={this.state.linkToWash}
+          handleColorChange={this.handleColorChange}
+          handleWashColorChange={this.handleWashColorChange}
           updateDMX={this.updateDMX}
           />
         <FourBar
           name="4Bar2"
           address={79}
           color={this.state.washColor}
-          handleColorChange={this.handleWashColorChange}
+          linkToWash={this.state.linkToWash}
+          handleColorChange={this.handleColorChange}
+          handleWashColorChange={this.handleWashColorChange}
           updateDMX={this.updateDMX}
           />
         <TriLED
