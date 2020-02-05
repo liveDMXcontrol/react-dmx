@@ -13,31 +13,37 @@ export default class FourBar extends Component {
   constructor (props) {
     super(props)
     this.parseToDMX=this.parseToDMX.bind(this)
+    this.selectColorChange=this.selectColorChange.bind(this)
 
     this.state = {
-      fader: { value: "50", style: { orient: "horizontal" }, property: "brightness" }
+      fader: { value: "50", style: { orient: "horizontal" }, property: "brightness" },
+      color: {r: 255, g: 255, b: 255, a: 1}
     }
 
     // this.handleColorChange = this.handleColorChange.bind(this)
   }
 
   static getDerivedStateFromProps(props, state) {
+    console.log('link: ', props.linkToWash)
     return {
       externalData: null,
-      color: props.color,
+      color: (props.linkToWash) ? props.color : state.color,
     };
 
-  }
-  shouldComponentUpdate(nextProps) {
-    return (this.props.color !== nextProps.color ||
-            this.props.masterDimmer !== nextProps.masterDimmer)
   }
   componentDidUpdate(prevProps) {
     this.props.updateDMX(
       this.parseToDMX(
-        this.props.color, this.props.masterDimmer))
+        this.state.color, this.props.masterDimmer))
   }
 
+  selectColorChange (e) {
+    if (this.props.linkToWash) {
+      return this.props.handleWashColorChange(e)
+    } else {
+      return this.props.handleColorChange(e, this)
+    }
+  }
   parseToDMX = (rgb) => {
     // take a rgb value and break it up into dmx messages
     let address = this.props.address
@@ -68,8 +74,8 @@ export default class FourBar extends Component {
           />
         <ColorSketch
           name="color"
-          storedValue={this.props.color}
-          handleChange={this.props.handleColorChange}
+          storedValue={this.state.color}
+          handleChange={this.selectColorChange}
           />
       </div>)
   }
