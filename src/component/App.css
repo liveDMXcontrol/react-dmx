@@ -64,7 +64,7 @@
 .App > div:nth-child(2n) {
   background-color: #BFBFBF;
 }
-.App > div:nth-child(3n) {
+/*.App > div:nth-child(3n) {
   background-color: #AFAFAF;
 }
 .App > div:nth-child(4n) {
@@ -72,4 +72,4 @@
 }
 .App > div:nth-child(5n) {
   background-color: #8F8F8F;
-}
+}*/
