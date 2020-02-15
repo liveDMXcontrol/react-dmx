@@ -6,7 +6,8 @@
     "react": "^16.11.0",
     "react-color": "^2.18.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "webmidi": "^2.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
