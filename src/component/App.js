@@ -5,7 +5,9 @@ import FourBar from './FourBar'
 import TriLED from './TriLED'
 import Mushroom from './Mushroom'
 import Trio from './Trio'
-import Dimmer from './Dimmer'
+// import DimmerPack from './DimmerPack'
+import Control from './Control'
+import WebMIDI from './LaunchControlXL'
 
 export default class App extends Component {
   constructor (props) {
@@ -15,11 +17,13 @@ export default class App extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleWashColorChange = this.handleWashColorChange.bind(this)
     this.handleFXColorChange = this.handleFXColorChange.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
     this.resetToZero = this.resetToZero.bind(this)
+    this.setWash = this.setWash.bind(this)
     this.state = {
         masterDimmer: 100,
         washColor: {r: 255, g: 255, b: 255, a: 1},
-        linkToWash: false,
+        linkToWash: true,
         fxColor: {r: 0, g: 0, b: 0, a: 1},
         fxSpinDirection: 0,
         fxDimmer: 0
@@ -42,6 +46,7 @@ export default class App extends Component {
     let newState = thisthis
     newState.color = e.rgb
     thisthis.setState(newState)
+    this.handleWashColorChange(e)
   }
   handleWashColorChange = (e, thisthis=this) => {
     let newState = this.state
@@ -53,15 +58,30 @@ export default class App extends Component {
     newState.fxColor = e.rgb
     this.setState(newState)
   }
+  handleCheckbox (e, thisthis=this) {
+    let newState = thisthis.state
+    newState[e.target.name] = e.target.checked
+    thisthis.setState(newState)
+    console.log(this.state[e.target.name])
+  }
   resetToZero = (e, thisthis=this) => {
     let newState = thisthis.state
     newState['fxSpinDirection'] = 0
     newState['fxDimmer'] = 0
     thisthis.setState(newState)
   }
+  setWash (rgb) {
+    // links colors to wash color
+    // then sets new wash color in app state
+
+    let newState = this.state
+    newState.linkToWash=true
+    newState.washColor=rgb
+    this.setState(newState)
+  }
 
   updateDMX (payload) {
-    // console.log('payload sent')
+    // console.log(payload)
     // return false
 
     fetch('http://dmx.local/api', {
@@ -81,7 +101,9 @@ export default class App extends Component {
           name="LEDParCan"
           address={145}
           color={this.state.washColor}
-          handleColorChange={this.handleWashColorChange}
+          linkToWash={this.state.linkToWash}
+          handleColorChange={this.handleColorChange}
+          handleWashColorChange={this.handleWashColorChange}
           masterDimmer={this.state.masterDimmer}
           updateDMX={this.updateDMX}
           />
@@ -92,6 +114,7 @@ export default class App extends Component {
           linkToWash={this.state.linkToWash}
           handleColorChange={this.handleColorChange}
           handleWashColorChange={this.handleWashColorChange}
+          masterDimmer={this.state.masterDimmer}
           updateDMX={this.updateDMX}
           />
         <FourBar
@@ -101,6 +124,7 @@ export default class App extends Component {
           linkToWash={this.state.linkToWash}
           handleColorChange={this.handleColorChange}
           handleWashColorChange={this.handleWashColorChange}
+          masterDimmer={this.state.masterDimmer}
           updateDMX={this.updateDMX}
           />
         <TriLED
@@ -141,12 +165,22 @@ export default class App extends Component {
           resetToZero={this.resetToZero}
           updateDMX={this.updateDMX}
           />
-        <Dimmer
-          name="Dimmer"
+        <Control 
+          name="masterControl"
+          masterDimmer={this.state.masterDimmer}
+          linkToWash={this.state.linkToWash}
+          handleChange={this.handleChange}
+          handleCheckbox={this.handleCheckbox}
+          setWash={this.setWash}
+          updateDMX={this.updateDMX}
+          />
+        {/* <WebMIDI /> */}
+        { /* <DimmerPack
+          name="DimmerPack"
           address={509}
           handleChange={this.handleChange}
           updateDMX={this.updateDMX}
-          />
+          /> */ }
       </div>
     )
   }

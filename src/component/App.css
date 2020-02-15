@@ -21,6 +21,9 @@
   .App div.Dimmer {
     grid-row: span 3;
   }
+  .App div.Control {
+
+  }
 }
 @media screen and (max-width: 1200px) {
   .App {

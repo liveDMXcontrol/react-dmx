@@ -27,6 +27,8 @@ export default class Widget extends Component {
           type={this.props.type}
           className={this.props.class}
           value={this.props.storedValue}
+          placeholder={this.props.placeholder}
+          checked={this.props.checked}
           min={this.props.min}
           max={this.props.max}
           num={this.props.num}
@@ -35,13 +37,15 @@ export default class Widget extends Component {
           readOnly={this.props.readOnly}
           onClick={this.props.onClick}
           onDoubleClick={this.props.onDoubleClick}
+          onKeyPress={this.props.handleKeyPress}
           />
       </div>)
   }
 }
 Widget.defaultProps = {
   style: {},
-  readOnly: false
+  readOnly: false,
+  checked: false
 }
 
 export class PropertyLabel extends Component {
@@ -103,6 +107,7 @@ export class Button extends Component {
           name={this.props.name}
           storedValue={this.props.text}
           type="button"
+          readOnly={true}
           onClick={this.props.handleClick} />
       </div>
     )
@@ -139,7 +144,7 @@ export class Switch extends Component {
           min={this.props.min}
           max={this.props.max}
           defaultValue={this.props.defaultValue}
-          storedValue={this.props.storedValue}
+          checked={this.props.storedValue}
           handleChange={this.props.handleChange}
           onDoubleClick={this.props.onDoubleClick} />
       </div>
@@ -229,4 +234,19 @@ Fader.defaultProps = {
   min: 0,
   max: 100,
   defaultValue: 0
+}
+
+export class KeyboardControl extends Component {
+  render () {
+    return (
+      <div className="KeyboardControl">
+        <Widget 
+          readOnly={true}
+          handleKeyPress={this.props.handleKeyPress}
+          storedValue=""
+          placeholder={this.props.name}
+          />
+      </div>
+    )
+  }
 }

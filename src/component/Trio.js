@@ -25,7 +25,7 @@ export default class Trio extends Component {
     this.turnOff=this.turnOff.bind(this)
     this.parseToDMX=this.parseToDMX.bind(this)
     this.state = {
-      linkColors: false,
+      linkColors: true,
       color1: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
       color2: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
       color3: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
@@ -129,7 +129,7 @@ export default class Trio extends Component {
     this.setState(newState)
   }
   parseToDMX = () => {
-    let channel = this.props.address-1
+    let channel = this.props.address-1 // just making it a little easier to read the channel assignments relative to manual
 
     return {
       "channels_list": [
@@ -245,19 +245,19 @@ export default class Trio extends Component {
       </div>
       <ColorSketch
         name="color1"
-        disableAlpha={false}
+        disableAlpha={true}
         storedValue={this.state.color1.rgb}
         handleChange={(e) => this.handleColorChange(e, "color1")}
         />
       <ColorSketch
         name="color2"
-        disableAlpha={false}
+        disableAlpha={true}
         storedValue={this.state.color2.rgb}
         handleChange={(e) => this.handleColorChange(e, "color2")}
         />
       <ColorSketch
         name="color3"
-        disableAlpha={false}
+        disableAlpha={true}
         storedValue={this.state.color3.rgb}
         handleChange={(e) => this.handleColorChange(e, "color3")}
         />

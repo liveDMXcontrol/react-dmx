@@ -44,24 +44,41 @@ export default class FourBar extends Component {
       return this.props.handleColorChange(e, this)
     }
   }
-  parseToDMX = (rgb) => {
+  parseToDMX = (rgb, dimmer) => {
     // take a rgb value and break it up into dmx messages
     let address = this.props.address
 
+    // console.log({
+    //   "channels_list": [
+    //     { "channel": address,        "value": Number(rgb.r * 100/dimmer) },
+    //     { "channel": (address + 1),  "value": Number(rgb.g * 100/dimmer) },
+    //     { "channel": (address + 2),  "value": Number(rgb.b * 100/dimmer) },
+    //     { "channel": (address + 3),  "value": Number(rgb.r * 100/dimmer) },
+    //     { "channel": (address + 4),  "value": Number(rgb.g * 100/dimmer) },
+    //     { "channel": (address + 5),  "value": Number(rgb.b * 100/dimmer) },
+    //     { "channel": (address + 6),  "value": Number(rgb.r * 100/dimmer) },
+    //     { "channel": (address + 7),  "value": Number(rgb.g * 100/dimmer) },
+    //     { "channel": (address + 8),  "value": Number(rgb.b * 100/dimmer) },
+    //     { "channel": (address + 9),  "value": Number(rgb.r * 100/dimmer) },
+    //     { "channel": (address + 10), "value": Number(rgb.g * 100/dimmer) },
+    //     { "channel": (address + 11), "value": Number(rgb.b * 100/dimmer) },
+    //   ]
+    // })
+
     return {
       "channels_list": [
-        { "channel": address,        "value": rgb.r },
-        { "channel": (address + 1),  "value": rgb.g },
-        { "channel": (address + 2),  "value": rgb.b },
-        { "channel": (address + 3),  "value": rgb.r },
-        { "channel": (address + 4),  "value": rgb.g },
-        { "channel": (address + 5),  "value": rgb.b },
-        { "channel": (address + 6),  "value": rgb.r },
-        { "channel": (address + 7),  "value": rgb.g },
-        { "channel": (address + 8),  "value": rgb.b },
-        { "channel": (address + 9),  "value": rgb.r },
-        { "channel": (address + 10), "value": rgb.g },
-        { "channel": (address + 11), "value": rgb.b },
+        { "channel": (address + 4),  "value": Number(rgb.r * 100/dimmer) },
+        { "channel": (address + 5),  "value": Number(rgb.g * 100/dimmer) },
+        { "channel": (address + 6),  "value": Number(rgb.b * 100/dimmer) },
+        { "channel": (address + 7),  "value": Number(rgb.r * 100/dimmer) },
+        { "channel": (address + 8),  "value": Number(rgb.g * 100/dimmer) },
+        { "channel": (address + 9),  "value": Number(rgb.b * 100/dimmer) },
+        { "channel": (address + 10), "value": Number(rgb.r * 100/dimmer) },
+        { "channel": (address + 11), "value": Number(rgb.g * 100/dimmer) },
+        { "channel": (address + 12), "value": Number(rgb.b * 100/dimmer) },
+        { "channel": (address + 13), "value": Number(rgb.r * 100/dimmer) },
+        { "channel": (address + 14), "value": Number(rgb.g * 100/dimmer) },
+        { "channel": (address + 15), "value": Number(rgb.b * 100/dimmer) },
       ]
     }
   }
@@ -74,7 +91,7 @@ export default class FourBar extends Component {
           />
         <ColorSketch
           name="color"
-          storedValue={this.state.color}
+          storedValue={(this.props.linkToWash) ? this.props.color : this.state.color}
           handleChange={this.selectColorChange}
           />
       </div>)

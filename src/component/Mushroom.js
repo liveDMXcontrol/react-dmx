@@ -69,10 +69,10 @@ export default class Mushroom extends Component {
   }
   parseToDMX = () => {
     let address = this.props.address
-    console.log('address: ', address)
+    // console.log('address: ', address)
 
-    console.log('dimmer: ', this.state.dimmer)
-    console.log('spinDirection', this.state.spinDirection)
+    // console.log('dimmer: ', this.state.dimmer)
+    // console.log('spinDirection', this.state.spinDirection)
     return {
       "channels_list": [
         { "channel": address,     "value": this.state.dimmer+14 },

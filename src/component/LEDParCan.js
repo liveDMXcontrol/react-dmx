@@ -6,14 +6,36 @@ export default class LEDParCan extends Component {
   constructor (props) {
     super(props)
     this.parseToDMX=this.parseToDMX.bind(this)
+    this.selectColorChange=this.selectColorChange.bind(this)
 
     this.state = {
-      fader: { value: "50", style: { orient: "horizontal" }, property: "brightness" }
+      fader: { value: "50", style: { orient: "horizontal" }, property: "brightness" },
+      color: {r: 255, g: 255, b: 255, a: 1}
     }
 
     // this.handleColorChange = this.handleColorChange.bind(this)
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      externalData: null,
+      color: (props.linkToWash) ? props.color : state.color,
+    };
+
+  }
+  componentDidUpdate(prevProps) {
+    this.props.updateDMX(
+      this.parseToDMX(
+        this.props.color, this.props.masterDimmer))
+  }
+
+  selectColorChange (e) {
+    if (this.props.linkToWash) {
+      return this.props.handleWashColorChange(e)
+    } else {
+      return this.props.handleColorChange(e, this)
+    }
+  }
   parseToDMX = (rgb, dimmer) => {
     // take a rgb value and break it up into dmx messages
     // console.log(this.props)
@@ -27,22 +49,6 @@ export default class LEDParCan extends Component {
       ]
     }
   }
-  static getDerivedStateFromProps(props, state) {
-    return {
-      externalData: null,
-      color: props.color,
-    };
-
-  }
-  shouldComponentUpdate(nextProps) {
-    return (this.props.color !== nextProps.color ||
-            this.props.masterDimmer !== nextProps.masterDimmer)
-  }
-  componentDidUpdate(prevProps) {
-    this.props.updateDMX(
-      this.parseToDMX(
-        this.props.color, this.props.masterDimmer))
-  }
 
   render () {
     return (
@@ -52,8 +58,8 @@ export default class LEDParCan extends Component {
           />
         <ColorSketch
           name="color"
-          storedValue={this.props.color}
-          handleChange={this.props.handleColorChange}
+          storedValue={(this.props.linkToWash) ? this.props.color : this.state.color}
+          handleChange={this.selectColorChange}
           />
       </div>)
   }
