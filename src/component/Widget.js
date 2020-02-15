@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { CirclePicker, SketchPicker } from 'react-color'
+import { CirclePicker, CustomPicker, SketchPicker } from 'react-color'
+
 import './Widget.css'
 
 export class DeviceLabel extends Component {
@@ -171,6 +172,21 @@ export class ColorCircle extends Component {
     )
   }
 }
+class MyPicker extends Component {
+  render() {
+    let { Alpha, Hue } = require('react-color/lib/components/common')
+    return (
+      <div className="MyPicker">
+        <div className="hue">
+          <Hue
+            {...this.props}
+            onChange={ this.handleChange }
+            />
+        </div>
+      </div>
+    )
+  }
+}
 export class ColorSketch extends Component {
   render () {
     return (
@@ -183,6 +199,16 @@ export class ColorSketch extends Component {
           presetColors={["#F00", "#0F0", "#00F", "#FF0", "#F0F", "#0FF", "#FFF", "#000",
                          "#F90", "#F09", "#0F9", "#9F0", "#90F", "#09F", "#999", "#333"]}
           />
+        {/*<MyPicker 
+          name={this.props.name}
+          color={this.props.storedValue}
+          onChange={this.props.handleChange}
+          rgb={this.props.color}
+          // hsl={{h: 0, s: 0, l: 0}}
+          disableAlpha={this.props.disableAlpha}
+          presetColors={["#F00", "#0F0", "#00F", "#FF0", "#F0F", "#0FF", "#FFF", "#000",
+                         "#F90", "#F09", "#0F9", "#9F0", "#90F", "#09F", "#999", "#333"]}
+          />*/}
       </div>
     )
   }

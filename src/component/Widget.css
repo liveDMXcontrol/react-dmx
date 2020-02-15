@@ -88,3 +88,12 @@
 .HorizontalFader {
 
 }
+
+.MyPicker .hue {
+  position: relative;
+  height: 20px;
+  width: 200px;
+}
+.MyPicker .hue .hue-horizontal>div>div {
+  height: 18px !important;
+}
