@@ -27,15 +27,15 @@ export default class Trio extends Component {
     this.state = {
       linkColors: true,
       linkToWash: false,
-      color1: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
-      color2: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
-      color3: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
-      pan: 75,
-      tilt: 65,
+      color1: {rgb: {r: 255, g: 255, b: 255, a: 1}, w: 255},
+      color2: {rgb: {r: 255, g: 255, b: 255, a: 1}, w: 255},
+      color3: {rgb: {r: 255, g: 255, b: 255, a: 1}, w: 255},
+      pan: 89,
+      tilt: 44,
       rotate: {type: 0, speed: 0},
-      dimmer: 50,
+      dimmer: 150,
       shutter: {type: 255, speed: 0},
-      zoom: 150,
+      zoom: 190,
       control: 0,
       movement_macros: 0
     }
@@ -52,16 +52,10 @@ export default class Trio extends Component {
     };
   }
   componentDidUpdate(prevProps) {
-    console.log(this.state)
     this.props.updateDMX(
       this.parseToDMX())
   }
 
-  // handleLinkColors = (e) => {
-  //   let newState = this.state
-  //   newState.linkColors = e.target.checked
-  //   this.setState(newState)
-  // }
   handleColorChange = (e, name) => {
     let newState = this.state
     const scale = (num, in_min=1, in_max=0, out_min=0, out_max=255) => {
@@ -130,7 +124,18 @@ export default class Trio extends Component {
   turnOff = (e) => {
     e.preventDefault();
     let newState = this.state
-    newState.shutter = newState.rotate = 0
+    newState = {
+      linkColors: true,
+      linkToWash: false,
+      pan: 89,
+      tilt: 44,
+      rotate: {type: 0, speed: 0},
+      dimmer: 150,
+      shutter: {type: 255, speed: 0},
+      zoom: 190,
+      control: 0,
+      movement_macros: 0
+    }
     this.setState(newState)
   }
   parseToDMX = () => {
@@ -328,7 +333,7 @@ export default class Trio extends Component {
         />
       <Button
         name="trioOff"
-        text="off"
+        text="reset"
         handleClick={this.turnOff}
         />
       <label>link to wash

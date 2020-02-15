@@ -43,9 +43,9 @@ export default class LEDParCan extends Component {
 
     return {
       "channels_list": [
-        { "channel": (address),     "value": (rgb.r * 100/dimmer) },
-        { "channel": (address + 1), "value": (rgb.g * 100/dimmer) },
-        { "channel": (address + 2), "value": (rgb.b * 100/dimmer) },
+        { "channel": (address),     "value": Math.round(rgb.r * dimmer/100) },
+        { "channel": (address + 1), "value": Math.round(rgb.g * dimmer/100) },
+        { "channel": (address + 2), "value": Math.round(rgb.b * dimmer/100) },
       ]
     }
   }

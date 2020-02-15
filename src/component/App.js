@@ -7,7 +7,7 @@ import Mushroom from './Mushroom'
 import Trio from './Trio'
 // import DimmerPack from './DimmerPack'
 import Control from './Control'
-import WebMIDI from './LaunchControlXL'
+// import WebMIDI from './LaunchControlXL'
 
 export default class App extends Component {
   constructor (props) {

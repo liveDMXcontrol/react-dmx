@@ -23,7 +23,7 @@ export default class Control extends Component {
   parseToDMX (e) {
     let payload = {
       "channels_list": [
-        { "channel": e.target[0].value, "value": e.target[1].value }
+        { "channel": Number(e.target[0].value), "value": Number(e.target[1].value) }
       ]
     }
     this.props.updateDMX(payload)

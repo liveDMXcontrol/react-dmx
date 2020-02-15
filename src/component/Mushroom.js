@@ -17,7 +17,7 @@
 // }
 
 import React, { Component } from 'react';
-import { Button, DeviceLabel, Fader, Switch } from './Widget';
+import { DeviceLabel, Fader, Switch } from './Widget';
 import './Mushroom.css'
 
 export default class Mushroom extends Component {
@@ -98,12 +98,13 @@ export default class Mushroom extends Component {
         handleChange={(e) => this.props.handleChange(e, this)}
         onDoubleClick={(e) => this.props.resetToZero(e, this)}
         />
+      <label>on/off
       <Switch
         name="dimmer"
         storedValue={this.state.dimmer}
         handleChange={this.handleDimmer}
         onDoubleClick={(e) => this.props.resetToZero(e, this)}
-       />
+       /></label>
 
       {/*<Button
         name="spinnyOff"
