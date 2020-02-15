@@ -24,12 +24,11 @@ export default class FourBar extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('link: ', props.linkToWash)
+    // console.log('link: ', props.linkToWash)
     return {
       externalData: null,
       color: (props.linkToWash) ? props.color : state.color,
     };
-
   }
   componentDidUpdate(prevProps) {
     this.props.updateDMX(
@@ -47,6 +46,15 @@ export default class FourBar extends Component {
   parseToDMX = (rgb, dimmer) => {
     // take a rgb value and break it up into dmx messages
     let address = this.props.address
+
+    const scale = (num, in_min=0, in_max=100, out_min=9, out_max=255) => {
+      if (num !== 0) {
+        return  Math.floor(((num) - in_min) * (out_max - out_min) /
+                (in_max - in_min) + out_min);
+      } else {
+        return 0
+      }
+    }
 
     // console.log({
     //   "channels_list": [
@@ -67,18 +75,21 @@ export default class FourBar extends Component {
 
     return {
       "channels_list": [
-        { "channel": (address + 4),  "value": Number(rgb.r * 100/dimmer) },
-        { "channel": (address + 5),  "value": Number(rgb.g * 100/dimmer) },
-        { "channel": (address + 6),  "value": Number(rgb.b * 100/dimmer) },
-        { "channel": (address + 7),  "value": Number(rgb.r * 100/dimmer) },
-        { "channel": (address + 8),  "value": Number(rgb.g * 100/dimmer) },
-        { "channel": (address + 9),  "value": Number(rgb.b * 100/dimmer) },
-        { "channel": (address + 10), "value": Number(rgb.r * 100/dimmer) },
-        { "channel": (address + 11), "value": Number(rgb.g * 100/dimmer) },
-        { "channel": (address + 12), "value": Number(rgb.b * 100/dimmer) },
-        { "channel": (address + 13), "value": Number(rgb.r * 100/dimmer) },
-        { "channel": (address + 14), "value": Number(rgb.g * 100/dimmer) },
-        { "channel": (address + 15), "value": Number(rgb.b * 100/dimmer) },
+        { "channel": (address + 0),  "value": 0 }, // control/operating mode
+        { "channel": (address + 1),  "value": scale(dimmer) },
+        { "channel": (address + 2),  "value": 0 }, // strobe
+        { "channel": (address + 3),  "value": Number(rgb.r) },
+        { "channel": (address + 4),  "value": Number(rgb.g) },
+        { "channel": (address + 5),  "value": Number(rgb.b) },
+        { "channel": (address + 6),  "value": Number(rgb.r) },
+        { "channel": (address + 7),  "value": Number(rgb.g) },
+        { "channel": (address + 8),  "value": Number(rgb.b) },
+        { "channel": (address + 9),  "value": Number(rgb.r) },
+        { "channel": (address + 10), "value": Number(rgb.g) },
+        { "channel": (address + 11), "value": Number(rgb.b) },
+        { "channel": (address + 12), "value": Number(rgb.r) },
+        { "channel": (address + 13), "value": Number(rgb.g) },
+        { "channel": (address + 14), "value": Number(rgb.b) },
       ]
     }
   }
