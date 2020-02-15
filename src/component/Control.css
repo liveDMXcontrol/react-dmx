@@ -1,0 +1,30 @@
+.Control {
+  /* background-color: #DFDFDF; */
+
+  position: relative;
+  height: 100%; width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  place-items: center;
+}
+
+.Control .Fader {
+    width: 100%;
+    text-align: center;
+}
+
+.Control .ValueLabel label {
+  grid-column: 1 / 2;
+  grid-row-start: 1;
+}
+
+.Control .NumberSelector input {
+    /*padding-bottom: 100%;
+    transform: rotate(-90deg);*/
+}
+
+.Control label {
+    display: flex;
+    flex-direction: column;
+}
