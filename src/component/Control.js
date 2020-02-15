@@ -40,6 +40,7 @@ export default class Control extends Component {
   handleKeyPress (e) {
     let rgb = {r: 0, g: 0, b: 0, a: 1}
     switch (e.key) {
+      // primary
       case 'q':
         rgb.r = 255*this.props.masterDimmer/100
         break
@@ -49,6 +50,7 @@ export default class Control extends Component {
       case 'e':
         rgb.b = 255*this.props.masterDimmer/100
         break
+      // secondary
       case 'a':
         rgb.r = 255*this.props.masterDimmer/100
         rgb.g = 255*this.props.masterDimmer/100
@@ -61,6 +63,31 @@ export default class Control extends Component {
         rgb.b = 255*this.props.masterDimmer/100
         rgb.r = 255*this.props.masterDimmer/100
         break
+      // ternary
+      case 'z': // #F90
+        rgb.r = 255*this.props.masterDimmer/100 // F
+        rgb.g = 153*this.props.masterDimmer/100 // 9
+        break
+      case 'x': // #F09
+        rgb.r = 255*this.props.masterDimmer/100
+        rgb.b = 153*this.props.masterDimmer/100
+        break
+      case 'c': // #0F9
+        rgb.g = 255*this.props.masterDimmer/100
+        rgb.b = 153*this.props.masterDimmer/100
+        break
+      case 'v': // #9F0
+        rgb.r = 153*this.props.masterDimmer/100
+        rgb.g = 255*this.props.masterDimmer/100
+        break
+      case 'b': // 90F
+        rgb.r = 153*this.props.masterDimmer/100
+        rgb.b = 255*this.props.masterDimmer/100
+        break
+      case 'n': // 09F
+        rgb.g = 153*this.props.masterDimmer/100
+        rgb.b = 255*this.props.masterDimmer/100
+        break
       case ' ':
         break
       case 'Enter':
@@ -70,7 +97,7 @@ export default class Control extends Component {
         break
       default:
         console.log(e.key)
-        break
+        return
     }
     this.props.setWash(rgb)
   }
