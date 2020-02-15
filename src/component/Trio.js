@@ -26,6 +26,7 @@ export default class Trio extends Component {
     this.parseToDMX=this.parseToDMX.bind(this)
     this.state = {
       linkColors: true,
+      linkToWash: false,
       color1: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
       color2: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
       color3: {rgb: {r: 255, g: 155, b: 0, a: 1}, w: 0},
@@ -44,19 +45,23 @@ export default class Trio extends Component {
     return {
       externalData: null,
       spinDirection: state.spinDirection,
-      dimmer: state.dimmer
+      dimmer: state.dimmer,
+      color1: (state.linkToWash) ? { rgb: {...props.washColor}, w: 0 } : state.color1,
+      color2: (state.linkToWash) ? { rgb: {...props.washColor}, w: 0 } : state.color2,
+      color3: (state.linkToWash) ? { rgb: {...props.washColor}, w: 0 } : state.color3
     };
   }
   componentDidUpdate(prevProps) {
+    console.log(this.state)
     this.props.updateDMX(
       this.parseToDMX())
   }
 
-  handleLinkColors = (e) => {
-    let newState = this.state
-    newState.linkColors = e.target.checked
-    this.setState(newState)
-  }
+  // handleLinkColors = (e) => {
+  //   let newState = this.state
+  //   newState.linkColors = e.target.checked
+  //   this.setState(newState)
+  // }
   handleColorChange = (e, name) => {
     let newState = this.state
     const scale = (num, in_min=1, in_max=0, out_min=0, out_max=255) => {
@@ -261,11 +266,13 @@ export default class Trio extends Component {
         storedValue={this.state.color3.rgb}
         handleChange={(e) => this.handleColorChange(e, "color3")}
         />
-      <Switch
-        name="linkColors"
-        storedValue={this.state.linkColors}
-        handleChange={this.handleLinkColors}
-        />
+      <label>link colors
+        <Switch
+          name="linkColors"
+          storedValue={this.state.linkColors}
+          handleChange={(e) => this.props.handleCheckbox(e, this)}
+          />
+        </label>
       <Select
         name="control"
         options={[
@@ -324,6 +331,12 @@ export default class Trio extends Component {
         text="off"
         handleClick={this.turnOff}
         />
+      <label>link to wash
+      <Switch
+        name="linkToWash"
+        storedValue={this.state.linkToWash}
+        handleChange={(e) => this.props.handleCheckbox(e, this)}
+        /></label>
       </div>
     )
   }

@@ -162,8 +162,10 @@ export default class App extends Component {
           name="Trio"
           address={1}
           handleChange={this.handleChange}
+          handleCheckbox={this.handleCheckbox}
           resetToZero={this.resetToZero}
           updateDMX={this.updateDMX}
+          washColor={this.state.washColor}
           />
         <Control 
           name="masterControl"
